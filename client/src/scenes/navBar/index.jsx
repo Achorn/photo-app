@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Box,
-  iconButtonClasses,
   InputBase,
   Typography,
   Select,
@@ -39,9 +38,7 @@ const Navbar = () => {
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
-  console.log("user: ", user);
   const fullName = `${user.firstName} ${user.lastName}`;
-  // const fullName = "poop";
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>

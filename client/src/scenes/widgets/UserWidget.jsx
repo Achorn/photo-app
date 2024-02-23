@@ -2,21 +2,19 @@ import {
   ManageAccountsOutlined,
   EditOutlined,
   LocationOnOutlined,
-  WOrkOutlinedOutlined,
   WorkOutlineOutlined,
 } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
-import { UseSelector, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserWidget = ({ userId, picturePath }) => {
-  // const [user, setUser] = useState(null);
-  const user = useSelector((state) => state.user);
-  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  // const user = useSelector((state) => state.user);
   const { palette } = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
@@ -25,17 +23,15 @@ const UserWidget = ({ userId, picturePath }) => {
   const main = palette.neutral.main;
 
   useEffect(() => {
-    // const getUser = async () => {
-    //   setIsLoading(true);
-    //   const response = await fetch(`http://localhost:4000/users/${userId}`, {
-    //     method: "GET",
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   });
-    //   const data = await response.json();
-    //   setUser(data);
-    //   setIsLoading(false);
-    // };
-    // getUser();
+    const getUser = async () => {
+      const response = await fetch(`/users/${userId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      setUser(data);
+    };
+    getUser();
   }, [token, userId]);
 
   if (!user) {
@@ -53,11 +49,6 @@ const UserWidget = ({ userId, picturePath }) => {
   } = user;
 
   return (
-    // isLoading ? (
-    // isLoading ? (
-    //   <div>loading</div>
-    // ) : (
-    // ) : (
     <WidgetWrapper>
       {/* first row */}
       <FlexBetween
@@ -152,8 +143,6 @@ const UserWidget = ({ userId, picturePath }) => {
       </Box>
     </WidgetWrapper>
   );
-  // );
-  // );
 };
 
 export default UserWidget;

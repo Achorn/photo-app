@@ -37,6 +37,7 @@ export const getFeedPosts = async (req, res) => {
 };
 
 export const getUserPosts = async (req, res) => {
+  console.log("in get osts");
   try {
     const { userId } = req.params;
     const posts = await Post.find({ userId });
